@@ -2,7 +2,7 @@
 
 Uno strumento open-source pensato per docenti, educatori e formatori che vogliono analizzare e confrontare progetti scolastici attraverso una dashboard HTML già pronta, basata su dati reali o simulati.
 
-> ✨ Il progetto nasce da un’ispirazione condivisa grazie al post di [Valentino Grossi su LinkedIn](https://www.linkedin.com/posts/valentino-grossi_genai-dashboard-ai-activity-7336275737932435474-uot7?utm_source=share&utm_medium=member_desktop&rcm=ACoAAA8rfckBph_PCjm20n9kKZ9NAtcI7dK_DwI).
+> ✨ Il progetto nasce da un’ispirazione condivisa grazie al post di [Valentino Grossi su LinkedIn](https://www.linkedin.com/posts/valentino-grossi_genai-dashboard-ai-activity-7336275737932435474-uot7?utm_source=share&utm_medium=member_desktop&rcm=ACoAAA8rfckBph_PCjm20n9kKZ9NAtcI7dK_DwI),  durante una formazione sull'uso dell'AI nella didattica. Grazie per aver acceso la miccia!
 
 ## 🎯 Obiettivo
 
@@ -26,6 +26,10 @@ osservatorio-progetti-scolastici/
 1. **Apri `index.html`** direttamente nel browser.
 2. **Modifica `feedback_sample.csv`** con i tuoi dati reali.
 3. **Ricarica la pagina HTML** per visualizzare le nuove analisi.
+
+📽️ [Guarda la demo](demo-video/1794.mp4)
+
+
 
 ## 👥 Per chi è pensato
 
