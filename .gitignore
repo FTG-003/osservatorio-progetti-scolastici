@@ -1,0 +1,39 @@
+# .gitignore
+
+# Sistema
+.DS_Store
+Thumbs.db
+
+# Python / Jupyter (se mai usato per pre-processing)
+__pycache__/
+.ipynb_checkpoints/
+*.py[cod]
+*.so
+
+# Dataset temporanei
+*.bak
+*.tmp
+*.log
+
+# HTML build locali (es. se si usano strumenti di build)
+dist/
+build/
+
+# Evita di tracciare file video locali pesanti
+video-demo/
+*.mp4
+*.mov
+
+# Editor
+.vscode/
+.idea/
+*.swp
+
+# Evita configurazioni personali
+.env
+*.env
+.env.*
+
+# Node (in caso venga integrato successivamente)
+node_modules/
+
