@@ -1,0 +1,157 @@
+<!--
+  VERSIONE AUTOCARICANTE
+  I dati sono integrati direttamente nel JS come stringa CSV, prelevati da:
+  '01_Analisi Dati Simulazione.csv'
+-->
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8" />
+  <title>Dashboard di Gradimento Progetti</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>body { font-family: sans-serif; margin: 40px; background: #f9f9f9; }
+  h1 { color: #333; }
+  table { border-collapse: collapse; width: 100%; margin-bottom: 40px; }
+  th, td { border: 1px solid #ddd; padding: 8px; text-align: center; }
+  th { background-color: #333; color: white; }
+  tr:nth-child(even) { background-color: #f2f2f2; }
+  .chart-container { display: flex; gap: 40px; flex-wrap: wrap; }
+  .chart-box { background: white; border-radius: 12px; box-shadow: 0 2px 8px #ccc; padding: 16px; margin-bottom: 30px; }
+  @media (max-width: 900px) {.chart-container { flex-direction: column; }}</style>
+</head>
+<body>
+<h1>📊 Dashboard di Gradimento Progetti</h1>
+<p id="info">Caricamento dati integrati…</p>
+<div id="summaryTable"></div>
+<div class="chart-container">
+  <div class="chart-box"><canvas id="barChart"></canvas></div>
+  <div class="chart-box"><canvas id="pieChart"></canvas></div>
+</div>
+<div class="chart-container">
+  <div class="chart-box"><canvas id="radarChart"></canvas></div>
+  <div class="chart-box"><canvas id="boxPlotChart"></canvas></div>
+</div>
+<script>
+// CSV iniettato direttamente (da "01_Analisi Dati Simulazione.csv")
+const csvText = `Project,Soddisfazione (1-5),Chiarezza contenuti (1-5),Utilità pratica (1-5),Consiglierei ad altri (1-5)
+Progetto A,4,4,5,5
+Progetto A,3,4,4,4
+Progetto A,5,5,5,5
+Progetto B,2,3,2,3
+Progetto B,3,3,3,3
+Progetto C,4,4,4,4
+Progetto C,4,3,4,3
+Progetto C,5,5,5,5`;
+
+parseCSVAndVisualize(csvText);
+
+function parseCSVAndVisualize(csv) {
+  const lines = csv.trim().split('\n');
+  const headers = lines[0].split(',');
+  const data = lines.slice(1).map(line => line.split(','));
+  const idxProject = headers.indexOf('Project');
+  const idxSod = headers.indexOf('Soddisfazione (1-5)');
+  const idxChi = headers.indexOf('Chiarezza contenuti (1-5)');
+  const idxUti = headers.indexOf('Utilità pratica (1-5)');
+  const idxCon = headers.indexOf('Consiglierei ad altri (1-5)');
+  const progetti = {};
+  data.forEach(row => {
+    const nome = row[idxProject];
+    if (!progetti[nome]) progetti[nome] = [];
+    progetti[nome].push([+row[idxSod], +row[idxChi], +row[idxUti], +row[idxCon]]);
+  });
+  const tableRows = [];
+  const chartLabels = [];
+  const chartDataSod = [], chartDataChi = [], chartDataUti = [], chartDataCon = [];
+  const radarDatasets = [];
+  for (const progetto in progetti) {
+    const dati = progetti[progetto];
+    const n = dati.length;
+    const mediaSod = dati.reduce((a, r) => a + r[0], 0) / n;
+    const mediaChi = dati.reduce((a, r) => a + r[1], 0) / n;
+    const mediaUti = dati.reduce((a, r) => a + r[2], 0) / n;
+    const mediaCon = dati.reduce((a, r) => a + r[3], 0) / n;
+    tableRows.push(`<tr><td>${progetto}</td><td>${mediaSod.toFixed(2)}</td><td>${mediaChi.toFixed(2)}</td><td>${mediaUti.toFixed(2)}</td><td>${mediaCon.toFixed(2)}</td></tr>`);
+    chartLabels.push(progetto);
+    chartDataSod.push(mediaSod);
+    chartDataChi.push(mediaChi);
+    chartDataUti.push(mediaUti);
+    chartDataCon.push(mediaCon);
+    radarDatasets.push({ label: progetto, data: [mediaSod, mediaChi, mediaUti, mediaCon], fill: true });
+  }
+  document.getElementById('summaryTable').innerHTML = `
+    <h2>📌 Media dei Voti per Progetto</h2>
+    <table>
+    <tr><th>Progetto</th><th>Soddisfazione</th><th>Chiarezza</th><th>Utilità Pratica</th><th>Consiglierei</th></tr>
+    ${tableRows.join('')}
+    </table>
+  `;
+  const barCtx = document.getElementById('barChart').getContext('2d');
+  window.barChartObj = new Chart(barCtx, {
+    type: 'bar', data: {
+      labels: chartLabels,
+      datasets: [
+        { label: 'Soddisfazione', data: chartDataSod },
+        { label: 'Chiarezza', data: chartDataChi },
+        { label: 'Utilità Pratica', data: chartDataUti },
+        { label: 'Consiglierei', data: chartDataCon }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'top' } },
+      scales: { y: { min: 1, max: 5, ticks: { stepSize: 1 } } }
+    }
+  });
+  const radarCtx = document.getElementById('radarChart').getContext('2d');
+  window.radarChartObj = new Chart(radarCtx, {
+    type: 'radar', data: {
+      labels: ['Soddisfazione', 'Chiarezza', 'Utilità Pratica', 'Consiglierei'],
+      datasets: radarDatasets
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'top' } },
+      scales: { r: { min: 1, max: 5, ticks: { stepSize: 1 } } }
+    }
+  });
+  const allSoddisfazione = data.map(row => +row[idxSod]);
+  const sodCounts = [1,2,3,4,5].map(v => allSoddisfazione.filter(x => x===v).length);
+  const pieCtx = document.getElementById('pieChart').getContext('2d');
+  window.pieChartObj = new Chart(pieCtx, {
+    type: 'pie', data: {
+      labels: ['1', '2', '3', '4', '5'],
+      datasets: [{ data: sodCounts }]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'right' } }
+    }
+  });
+  const boxPlotCtx = document.getElementById('boxPlotChart').getContext('2d');
+  const boxPlotData = Object.entries(progetti).map(([nome, voti]) => {
+    const valori = voti.map(r => r[0]);
+    const min = Math.min(...valori);
+    const max = Math.max(...valori);
+    const mean = valori.reduce((a,b)=>a+b,0)/valori.length;
+    return { nome, min, max, mean };
+  });
+  window.boxPlotChartObj = new Chart(boxPlotCtx, {
+    type: 'bar', data: {
+      labels: boxPlotData.map(d => d.nome),
+      datasets: [
+        { label: 'Range Soddisfazione', data: boxPlotData.map(d => d.max - d.min), backgroundColor: 'rgba(99, 102, 241, 0.3)' },
+        { label: 'Media Soddisfazione', data: boxPlotData.map(d => d.mean), type: 'line', borderColor: 'rgba(99, 102, 241, 1)', borderWidth: 2, fill: false, pointRadius: 4, pointBackgroundColor: 'rgba(99, 102, 241, 1)' }
+      ]
+    },
+    options: {
+      responsive: true,
+      plugins: { legend: { position: 'top' } },
+      scales: { y: { min: 1, max: 5, ticks: { stepSize: 1 } } }
+    }
+  });
+  document.getElementById('info').innerHTML = '✅ Dati caricati automaticamente.';
+}
+</script>
+</body>
+</html>
