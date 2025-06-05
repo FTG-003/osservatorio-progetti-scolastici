@@ -27,9 +27,15 @@ osservatorio-progetti-scolastici/
 2. **Modifica `feedback_sample.csv`** con i tuoi dati reali.
 3. **Ricarica la pagina HTML** per visualizzare le nuove analisi.
 
+---
+
+## 🌐 Live Demo
+
+[![Guarda la demo](https://img.shields.io/badge/Live-Dashboard-blue?style=for-the-badge&logo=github)](https://ftg-003.github.io/osservatorio-progetti-scolastici/)
+
 📽️ Guarda la demo : https://github.com/user-attachments/assets/596e94b3-2873-4ab4-b293-fb79052b4373
 
-
+---
 
 ## 👥 Per chi è pensato
 
