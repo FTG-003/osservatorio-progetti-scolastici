@@ -1,66 +1,48 @@
 # 🧭 Osservatorio Progetti Scolastici
 
-Uno strumento open-source per supportare docenti e formatori nell'analisi e nella riflessione sui progetti scolastici attraverso dashboard interattive alimentate da dati reali o simulati.
+Uno strumento open-source pensato per docenti, educatori e formatori che vogliono analizzare e confrontare progetti scolastici attraverso una dashboard HTML già pronta, basata su dati reali o simulati.
 
-> ✨ Questo progetto nasce da un'ispirazione condivisa grazie al post di [Valentino Grossi su LinkedIn](https://www.linkedin.com/posts/valentino-grossi_genai-dashboard-ai-activity-7336275737932435474-uot7?utm_source=share&utm_medium=member_desktop&rcm=ACoAAA8rfckBph_PCjm20n9kKZ9NAtcI7dK_DwI), durante una formazione sull'uso dell'AI nella didattica. Grazie per aver acceso la miccia!
+> ✨ Il progetto nasce da un’ispirazione condivisa grazie al post di [Valentino Grossi su LinkedIn](https://www.linkedin.com/posts/valentino-grossi_genai-dashboard-ai-activity-7336275737932435474-uot7?utm_source=share&utm_medium=member_desktop&rcm=ACoAAA8rfckBph_PCjm20n9kKZ9NAtcI7dK_DwI), durante una formazione sull’uso dell’AI nella didattica.
 
 ## 🎯 Obiettivo
 
-Fornire una base semplice ma efficace per:
-- raccogliere feedback anonimo da parte degli studenti
-- visualizzare i dati su più criteri (soddisfazione, chiarezza, utilità, consigliabilità)
-- facilitare il confronto tra progetti
-- attivare momenti di riflessione didattica tra colleghi
+- Facilitare la riflessione didattica tra pari
+- Visualizzare in modo chiaro il gradimento degli studenti
+- Promuovere una cultura della valutazione formativa e partecipata
 
-## 🛠️ Contenuto della repo
+## 📁 Contenuto della repo
 
 ```
 osservatorio-progetti-scolastici/
-├── app/
-│   └── dashboard.py            # codice principale della dashboard (es. in Streamlit)
+├── index.html                 # dashboard pronta all’uso
 ├── data/
-│   └── feedback_sample.csv     # template CSV con dati simulati da personalizzare
-├── requirements.txt           # dipendenze da installare con pip
-├── LICENSE                    # licenza MIT per uso e modifica liberi
-└── README.md                  # questo file
+│   └── feedback_sample.csv     # esempio di dataset con feedback simulati
+├── assets/                    # eventuali risorse grafiche (opzionale)
+└── README.md
 ```
 
-## 🚀 Come iniziare
+## 🚀 Come usarlo
 
-1. Clona la repo:
-```bash
-git clone https://github.com/tuo-utente/osservatorio-progetti-scolastici.git
-```
-
-2. Installa le dipendenze:
-```bash
-pip install -r requirements.txt
-```
-
-3. Avvia la dashboard:
-```bash
-streamlit run app/dashboard.py
-```
+1. **Apri `index.html`** direttamente nel browser.
+2. **Modifica `feedback_sample.csv`** con i tuoi dati reali.
+3. **Ricarica la pagina HTML** per visualizzare le nuove analisi.
 
 ## 👥 Per chi è pensato
 
-- Insegnanti e formatori
-- Coordinatori di dipartimento o referenti PCTO
-- Scuole che vogliono attivare pratiche di valutazione partecipata
+- Insegnanti che coordinano progetti interdisciplinari
+- Team di docenti per l'autovalutazione PCTO
+- Formatori che vogliono uno strumento semplice per attivare dialogo
 
 ## 🔁 Adattabilità
 
-- I dati sono anonimi e modificabili
-- Il layout può essere personalizzato con altri grafici o criteri
-- Si possono integrare strumenti AI per suggerimenti automatici o clustering
+- Il file CSV può essere modificato facilmente (es. da Excel o Google Fogli)
+- È possibile inserire nuovi criteri o modificare le voci esistenti
+- La dashboard può essere pubblicata su GitHub Pages o condivisa in Drive
 
 ## ✨ Licenza
 
-Questo progetto è rilasciato sotto **MIT License**, una licenza permissiva che consente il riutilizzo anche commerciale, a condizione che venga mantenuto l'attributo agli autori originali.
+Questo progetto è rilasciato sotto **MIT License**: usalo, modificalo, condividilo liberamente citando la fonte.
 
-✅ Adatta per:
-- progetti educativi condivisi
-- remix e fork didattici
-- uso in formazione e scuole pubbliche
-
-🔗 [Scopri di più su choosealicense.com](https://choosealicense.com/licenses/mit/)
+---
+Realizzato con cura per la scuola pubblica italiana 🧡  
+Condividi la tua versione o remix!
