@@ -27,7 +27,9 @@ osservatorio-progetti-scolastici/
 2. **Modifica `feedback_sample.csv`** con i tuoi dati reali.
 3. **Ricarica la pagina HTML** per visualizzare le nuove analisi.
 
-📽️ <video src="https://ftg-003.github.io/osservatorio-progetti-scolastici/src/1749.mp4" controls width="100%" />
+📽️ https://github.com/user-attachments/assets/596e94b3-2873-4ab4-b293-fb79052b4373
+[![Guarda la demo](https://ftg-003.github.io/osservatorio-progetti-scolastici/demo-video/preview.png)](https://ftg-003.github.io/osservatorio-progetti-scolastici/demo-video/1749.mp4)
+
 
 
 
